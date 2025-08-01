@@ -9,9 +9,16 @@ myconn = mydb.connect(
     password= os.environ.get("DB_PASSWORD","root"),
     database= os.environ.get("DB_NAME","hello")
 )
-
 mycursor = myconn.cursor()
-mycursor.execute("create table if not exist world (id int, name varchar(20), lastname varchar(20))")
+mycursor.execute("""
+CREATE TABLE IF NOT EXISTS world (
+    id INT,
+    name VARCHAR(20),
+    lastname VARCHAR(20)
+)
+""")
+
+
 app = Flask(__name__)
 
 
