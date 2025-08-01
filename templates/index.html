@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Styled Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-container h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .form-container input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-container input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(37, 117, 252, 0.4);
+        }
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.03);
+        }
+        #para {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Enter Details</h2>
+        <form action="/" method="post">
+            <input type="text" name="id" id="id" placeholder="Enter ID" required>
+            <input type="text" name="name" id="name" placeholder="Enter Name" required>
+            <input type="text" name="last" id="last" placeholder="Enter Last Name" required>
+            <button type="submit" id="btn">Submit</button>
+        </form>
+        <p id="para">Enter the Details</p>
+    </div>
+</body>
+<script>
+    let id = document.getElementById("id");
+    let name = document.getElementById("name");
+    let last = document.getElementById("last");
+    let btn = document.getElementById("btn");
+    let para = document.getElementById("para");
+
+    btn.addEventListener("click", (e) => {
+        if (id.value === "" || name.value === "" || last.value === "") {
+            e.preventDefault(); // Prevent form submission
+            para.innerText = "⚠ Please fill all fields!";
+            para.style.color = "red";
+        } else {
+            para.innerText = "✅ Submitted successfully!";
+            para.style.color = "green";
+        }
+        
+    });
+</script>
+</html>
