@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: mysql:8.0
+        image: vishal200527/flask-by-me:latest
         ports:
         - containerPort: 5000
         env:
