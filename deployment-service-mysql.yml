@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mysql-deployment
+  namespace: mydev
+
+spec:
+  template:
+    metadata:
+      labels:
+        app: mysql-label
+    spec:
+      containers:
+      - name: mysql-container
+        image: mysql:8.0
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: hello
+
+  replicas: 1
+  selector:
+    matchLables:
+      app: mysql-label
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql-service
+  namespace: mydev
+spec:
+  selector:
+    app: mysql-label
+  ports:
+  - protocol : TCP
+    port: 80
+    targetPort: 3306

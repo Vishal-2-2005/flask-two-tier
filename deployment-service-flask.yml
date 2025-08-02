@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: flask-deployment
+  namespace: mydev
+
+spec:
+  template:
+    metadata:
+      labels:
+        app: flask-label
+    spec:
+      containers:
+      - name: flask-container
+        image: mysql:8.0
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DB_HOST
+          value: mysql-service
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          value: root
+        - name: DB_NAME
+          value: hello
+
+  replicas: 1
+  selector:
+    matchLables:
+      app: flask-label
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: flask-service
+  namespace: mydev
+spec:
+  selector:
+    app: flask-label
+  ports:
+  - protocol : TCP
+    port: 81
+    targetPort: 5000
