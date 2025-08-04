@@ -5,6 +5,10 @@ metadata:
   namespace: mydev
 
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-label
   template:
     metadata:
       labels:
@@ -12,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: vishal200527/flask-by-me:latest
+        image: vishal200527/noraml-app:latest
         ports:
         - containerPort: 5000
         env:
@@ -25,10 +29,7 @@ spec:
         - name: DB_NAME
           value: hello
 
-  replicas: 1
-  selector:
-    matchLables:
-      app: flask-label
+  
 ---
 kind: Service
 apiVersion: v1

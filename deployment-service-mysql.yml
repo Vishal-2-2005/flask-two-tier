@@ -5,6 +5,10 @@ metadata:
   namespace: mydev
 
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-label
   template:
     metadata:
       labels:
@@ -21,10 +25,7 @@ spec:
         - name: MYSQL_DATABASE
           value: hello
 
-  replicas: 1
-  selector:
-    matchLables:
-      app: mysql-label
+  
 ---
 kind: Service
 apiVersion: v1
@@ -36,5 +37,5 @@ spec:
     app: mysql-label
   ports:
   - protocol : TCP
-    port: 80
+    port: 3306
     targetPort: 3306
